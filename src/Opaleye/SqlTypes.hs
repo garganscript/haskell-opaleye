@@ -93,7 +93,8 @@ module Opaleye.SqlTypes (
 
   P.SqlTSQuery,
   P.SqlTSVector,
-  sqlTSQuery
+  sqlTSQuery,
+  sqlToTSQuery
   ) where
 
 import qualified Opaleye.Field   as F
@@ -213,6 +214,9 @@ sqlValueJSON = P.pgValueJSON
 
 sqlTSQuery :: String -> F.Field P.SqlTSQuery
 sqlTSQuery = P.pgTSQuery . sqlString
+
+sqlToTSQuery :: String -> F.Field P.SqlTSQuery
+sqlToTSQuery = P.to_pgTSQuery
 
 -- The jsonb data type was introduced in PostgreSQL version 9.4
 -- JSONB values must be SQL string quoted

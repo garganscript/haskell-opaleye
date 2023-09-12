@@ -190,6 +190,10 @@ pgTSVector (C.Column e) = C.Column (HPQ.FunExpr "tsvector" [e])
 pgTSQuery :: Field SqlText -> Field SqlTSQuery
 pgTSQuery (C.Column e) = C.Column (HPQ.FunExpr "tsquery" [e])
 
+-- | Converts a 'String' into a Postgres' tsQuery by calling 'to_tsquery' on the input string.
+to_pgTSQuery :: String -> Field SqlTSQuery
+to_pgTSQuery query = C.Column (HPQ.FunExpr "to_tsquery" [HPQ.ConstExpr (HPQ.StringLit query)])
+
 
 instance IsSqlType SqlBool where
   showSqlType _ = "boolean"
