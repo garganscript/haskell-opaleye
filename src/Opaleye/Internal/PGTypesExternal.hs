@@ -194,6 +194,10 @@ pgTSQuery (C.Column e) = C.Column (HPQ.FunExpr "tsquery" [e])
 to_pgTSQuery :: String -> Field SqlTSQuery
 to_pgTSQuery query = C.Column (HPQ.FunExpr "to_tsquery" [HPQ.ConstExpr (HPQ.StringLit query)])
 
+-- | Converts a 'String' into a Postgres' tsQuery by calling 'plainto_tsquery' on the input string.
+plainto_pgTSQuery :: String -> Field SqlTSQuery
+plainto_pgTSQuery query = C.Column (HPQ.FunExpr "plainto_tsquery" [HPQ.ConstExpr (HPQ.StringLit query)])
+
 
 instance IsSqlType SqlBool where
   showSqlType _ = "boolean"
